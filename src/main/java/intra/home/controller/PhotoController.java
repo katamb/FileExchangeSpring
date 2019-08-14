@@ -57,7 +57,7 @@ public class PhotoController {
     }
 
     @DeleteMapping("/delete/photo/{photoId}")
-    public void uploadPhotos(@PathVariable("photoId") Long photoId) {
+    public void deletePhotos(@PathVariable("photoId") Long photoId) {
         photoService.deleteFile(photoId);
     }
 }

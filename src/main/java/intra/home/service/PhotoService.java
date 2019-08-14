@@ -87,6 +87,7 @@ public class PhotoService {
 
     public void deleteFile(Long fileId) {
         Photo photo = photoMapper.findFileById(fileId);
+        photoMapper.deleteFileById(fileId);
         try {
             Path targetLocation = fileStorageLocation.resolve(photo.getFileName());
             Files.delete(targetLocation);
