@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="intra.home.mapper.FileMapper">
+
+    <select id="getFileIds" resultType="java.lang.Long" parameterType="java.lang.String">
+        SELECT file_id
+        FROM file
+        WHERE file_type = #{fileType};
+    </select>
+
+    <select id="getAllFileIds" resultType="java.lang.Long">
+        SELECT file_id
+        FROM file;
+    </select>
+
+    <select id="findFileById" resultType="intra.home.model.FileDto" parameterType="java.lang.Long">
+        SELECT file_id,
+               original_file_name,
+               file_extension,
+               unique_file_name,
+               file_size,
+               file_type,
+               created_at
+        FROM file
+        WHERE file_id = #{fileId};
+    </select>
+
+    <select id="findFilesByType" resultType="intra.home.model.FileDto" parameterType="java.lang.String">
+        SELECT file_id,
+               original_file_name,
+               file_extension,
+               unique_file_name,
+               file_size,
+               file_type,
+               created_at
+        FROM file
+        WHERE file_type = #{fileType};
+    </select>
+
+    <select id="findAllFiles" resultType="intra.home.model.FileDto">
+        SELECT file_id,
+               original_file_name,
+               file_extension,
+               unique_file_name,
+               file_size,
+               file_type,
+               created_at
+        FROM file;
+    </select>
+
+    <insert id="saveFileData" parameterType="intra.home.model.FileDto">
+        INSERT INTO file (original_file_name,
+                          file_extension,
+                          unique_file_name,
+                          file_size,
+                          file_type)
+        VALUES (#{originalFileName},
+                #{fileExtension},
+                #{uniqueFileName},
+                #{fileSize},
+                #{fileType});
+    </insert>
+
+    <delete id="deleteFileById" parameterType="java.lang.Long">
+        DELETE FROM file
+        WHERE file_id = #{fileId};
+    </delete>
+
+    <delete id="deleteFilesByType" parameterType="java.lang.String">
+        DELETE FROM file
+        WHERE file_type = #{fileType};
+    </delete>
+
+    <delete id="deleteAllFiles" >
+        DELETE FROM file;
+    </delete>
+
+</mapper>
