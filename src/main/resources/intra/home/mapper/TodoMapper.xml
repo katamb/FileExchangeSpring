@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="intra.home.mapper.TodoMapper">
+
+    <select id="getAllTodosBySubject" resultType="intra.home.model.TodoDto" parameterType="java.lang.Long">
+        SELECT todo_id,
+               todo_subject,
+               todo_content,
+               todo_status
+        FROM todo_list
+        WHERE todo_subject = #{subjectId}
+        ORDER BY todo_id;
+    </select>
+
+    <update id="updateTodoStatus" parameterType="intra.home.model.TodoDto">
+        UPDATE todo_list
+        SET todo_status = #{todoStatus}
+        WHERE todo_id = #{todoId};
+    </update>
+
+    <insert id="addTodo" parameterType="intra.home.model.TodoDto">
+        INSERT INTO todo_list (todo_subject,
+                               todo_content,
+                               todo_status)
+        VALUES (#{todoSubject},
+                #{todoContent},
+                #{todoStatus});
+    </insert>
+
+</mapper>

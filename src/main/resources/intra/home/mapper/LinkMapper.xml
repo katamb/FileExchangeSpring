@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="intra.home.mapper.LinkMapper">
+
+    <select id="getAllLinksBySubject" resultType="intra.home.model.LinkDto" parameterType="java.lang.Long">
+        SELECT link_id,
+               link_subject,
+               link_content,
+               link_url
+        FROM link_list
+        WHERE link_subject = #{subjectId}
+        ORDER BY link_id;
+    </select>
+
+    <insert id="addLink" parameterType="intra.home.model.LinkDto">
+        INSERT INTO link_list (link_subject,
+                               link_content,
+                               link_url)
+        VALUES (#{linkSubject},
+                #{linkContent},
+                #{linkUrl});
+    </insert>
+
+</mapper>

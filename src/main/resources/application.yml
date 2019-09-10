@@ -3,24 +3,26 @@ server:
 
 spring:
   datasource:
-      initialization-mode: always
-      url: jdbc:postgresql://localhost:5432/intranet
-      username: postgres
-      password: k22JERecd # todo: dont upload passwords
-      hikari.maximum-pool-size: 1
-      tomcat.max-active: 1
+    initialization-mode: always
+    url: jdbc:postgresql://localhost:5432/intranet
+    username: postgres
+    password:  # todo: dont upload passwords, this one can go up, it's only for local development
+    hikari.maximum-pool-size: 1
+    tomcat.max-active: 1
   jpa:
     properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
     database-platform: org.hibernate.dialect.H2Dialect
     hibernate.ddl-auto: create
   h2.console:
-      enabled: true
-      path: /h2-console
+    enabled: true
+    path: /h2-console
   servlet.multipart:
-      enabled: true
-      file-size-threshold: 2KB
-      maxFileSize: 5GB
-      maxRequestSize: 6GB
+    enabled: true
+    file-size-threshold: 2KB
+    maxFileSize: 5GB
+    maxRequestSize: 6GB
+  liquibase:
+    change-log: classpath:/liquibase/master.xml
 
 mybatis:
   mapper-locations: classpath*:/intra/home/mapper/*.xml
